@@ -17,7 +17,7 @@ resource "jenkins_job" "first" {
   template = <<EOF
   <flow-definition plugin="workflow-job@2.24">
   <actions/>
-  <description></description>
+  <description>{{ .ProjectURL }}</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
