@@ -11,7 +11,7 @@ resource "jenkins_job" "first" {
   disabled     = false
 
   parameters = {
-    GithubProjectURL = "${var.github_project_url}"
+    ProjectURL = "${var.github_project_url}"
   }
 
   template = <<EOF
@@ -21,7 +21,7 @@ resource "jenkins_job" "first" {
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
-      <projectUrl>{{ .GithubProjectURL }}</projectUrl>
+      <projectUrl>{{ .ProjectURL }}</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
@@ -43,7 +43,7 @@ sh '''if [ -d "helloWorld" ];
     cd helloWorld
     git pull origin master
   else
-    git clone {{ .GithubProjectURL }}
+    git clone {{ .ProjectURL }}
       cd helloWorld
   fi'''
   }
