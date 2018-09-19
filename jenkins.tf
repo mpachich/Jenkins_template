@@ -11,17 +11,18 @@ resource "jenkins_job" "first" {
   disabled     = false
 
   parameters = {
-    ProjectURL = "${var.github_project_url}"
+    ProjectUrl = "${var.github_project_url}"
   }
 
   template = <<EOF
   <flow-definition plugin="workflow-job@2.24">
   <actions/>
-  <description>{{ .ProjectURL }}</description>
+  <description>{{ .Description }}</description>
+  {{- with .Parameters }}
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
-      <projectUrl>"http://github.com/mpachich/helloWorld"</projectUrl>
+      <projectUrl>{{ .ProjectUrl }}</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
