@@ -17,7 +17,7 @@ resource "jenkins_job" "first" {
   template = <<EOF
 <flow-definition plugin="workflow-job@2.24">
 <actions/>
-<description>{{ .Description }}</description>
+<description></description>
 {{- with .Parameters }}
 <keepDependencies>false</keepDependencies>
 <properties>
@@ -59,6 +59,7 @@ java helloWorld'''
 </definition>
 <triggers/>
 <disabled>false</disabled>
+{{- end }}
 </flow-definition>
 EOF
 }
