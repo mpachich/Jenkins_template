@@ -21,7 +21,7 @@ resource "jenkins_job" "first" {
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
-      <projectUrl>{{ .ProjectURL }}</projectUrl>
+      <projectUrl>"https://github.com/mpachich/helloWorld"</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
@@ -43,7 +43,7 @@ sh '''if [ -d "helloWorld" ];
     cd helloWorld
     git pull origin master
   else
-    git clone {{ .ProjectURL }}
+    git clone https://github.com/mpachich/helloWorld
       cd helloWorld
   fi'''
   }
