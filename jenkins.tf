@@ -22,7 +22,7 @@ resource "jenkins_job" "first" {
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
       <projectUrl>${var.github_project_url}</projectUrl>
-      <displayName></displayName>
+      <displayName>${var.display_name}</displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
@@ -36,14 +36,14 @@ resource "jenkins_job" "first" {
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.54">
     <script>node{
       stage ('Code Fetch'){
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'http://github.com/mpachich/helloWorld.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: '${var.github_project_url}.git']]])
 
 sh '''if [ -d "helloWorld" ];
   then
     cd helloWorld
     git pull origin master
   else
-    git clone http://github.com/mpachich/helloWorld.git
+    git clone ${var.github_project_url}.git
       cd helloWorld
   fi'''
   }
