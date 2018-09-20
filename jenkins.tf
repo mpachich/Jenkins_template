@@ -21,7 +21,7 @@ resource "jenkins_job" "first" {
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.2">
-      <projectUrl>"http://github.com/mpachich/helloWorld"</projectUrl>
+      <projectUrl>{${var.github_project_url}}</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
