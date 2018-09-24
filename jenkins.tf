@@ -1,5 +1,5 @@
 provider "jenkins" {
-  server_url = "${var.jenkins_url}"
+  server_url = "${var.jenkins_url}:30001"
   username   = "${var.jenkins_username}"
   password   = "${var.jenkins_password}"
 }
